@@ -14,11 +14,7 @@ const Sidebar = () => {
           <div>
             <img src="/public/app-logo.png" className="w-20" alt="nav-logo" />
           </div>
-          <img
-            src="/public/app-name-logo.png"
-            alt="name-logo"
-            className="w-20"
-          />
+          <img src="/app-name-logo.png" alt="name-logo" className="w-20" />
         </Link>
       </div>
       <nav className="flex-1 px-4 py-6 flex flex-col gap-4">

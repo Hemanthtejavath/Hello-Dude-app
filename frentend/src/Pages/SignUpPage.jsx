@@ -22,7 +22,7 @@ const Signup = () => {
   return (
     <div
       className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500"
-      style={{ backgroundImage: "url('/public/logo.png')" }}
+      style={{ backgroundImage: "url('/logo.png')" }}
     >
       {/* Background glow */}
       <div className="absolute w-96 h-96 bg-pink-400/30 rounded-full blur-3xl top-[-80px] left-[-80px] animate-pulse"></div>
@@ -33,7 +33,7 @@ const Signup = () => {
         {/* Header */}
         <div className="flex flex-col gap-4  sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <img src="/public/bg-logo.png" className="w-50" alt="logo" />
+            <img src="/bg-logo.png" className="w-50" alt="logo" />
           </div>
 
           <div className="flex items-center gap-3">
@@ -123,7 +123,7 @@ const Signup = () => {
           {/* Image Section (NO BORDER, NO BOX) */}
           <div className="hidden md:flex flex-col items-center justify-center text-center">
             <img
-              src="/public/nav-logo-1.png"
+              src="/nav-logo-1.png"
               alt="online calling"
               className="w-72 mb-6 hover:scale-105 transition duration-300"
             />

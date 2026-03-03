@@ -21,14 +21,10 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 lg:hidden">
             <div>
-              <img src="/public/app-logo.png" className="w-20" alt="nav-logo" />
+              <img src="/app-logo.png" className="w-20" alt="nav-logo" />
             </div>
             <span className="text-lg font-extrabold tracking-wide bg-gradient-to-r from-fuchsia-400 to-indigo-400 bg-clip-text text-transparent">
-              <img
-                src="/public/app-name-logo.png"
-                alt="name-logo"
-                className="w-20"
-              />
+              <img src="/app-name-logo.png" alt="name-logo" className="w-20" />
             </span>
           </Link>
 

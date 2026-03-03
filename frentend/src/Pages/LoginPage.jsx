@@ -92,7 +92,7 @@ const LoginPage = () => {
         {/* Image Section (No Border Box) */}
         <div className="hidden md:flex flex-col items-center justify-center text-center">
           <img
-            src="/public/bg-logo.png"
+            src="/bg-logo.png"
             alt="login visual"
             className="w-100 mb-6 hover:scale-105 transition duration-300"
           />
