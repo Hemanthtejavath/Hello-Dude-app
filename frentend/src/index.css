@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Stream Chat (stream-chat-react)
+   Requirement:
+   - ChatPage background should follow DaisyUI theme
+   - Chat "body" (actual chat UI surfaces) should stay white */
+
+.chat-page .str-chat__channel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* This is the area behind the chat container */
+  background-color: hsl(var(--b2));
+  color: hsl(var(--bc));
+  height: 100%;
+}
+
+.chat-page .str-chat {
+  /* Let the outer area reflect the theme */
+  background-color: hsl(var(--b2));
+  color: hsl(var(--bc));
+}
+
+.str-chat__container {
+  max-width: 1200px;
+  width: 100%;
+  height: 95% !important;
+  margin: 0 auto !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.chat-page .str-chat__container {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.chat-page .str-chat__list {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 12px;
+}
+
+.chat-page .str-chat__channel-header {
+  background-color: #ffffff;
+  color: #000000;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.str-chat__list-notifications {
+  display: none;
+}
+
+.chat-page .str-chat__message-input {
+  background-color: #ffffff;
+  color: #000000;
+  border-top: 1px solid #e5e7eb;
+}
+
+.chat-page .str-chat__thread {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Stream default input uses its own surface colors; keep it readable on all themes. */
+.chat-page .str-chat__message-input textarea {
+  color: #000000;
+  caret-color: #000000;
+}
+
+.chat-page .str-chat__message-input textarea::placeholder {
+  color: rgba(0, 0, 0, 0.55);
+}
