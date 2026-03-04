@@ -98,26 +98,28 @@ const ChatPage = () => {
   if (loading || !chatClient || !channel) return <ChatLoader />;
 
   return (
-    <div className="chat-page h-[88vh] bg-base-200 text-base-content">
-      <Chat client={chatClient}>
-        <Channel channel={channel}>
-          <div className="w-full relative">
-            <button
-              onClick={handleVideoCall}
-              className="btn btn-primary btn-circle absolute top-4 right-4 z-10"
-              title="Start video call"
-            >
-              <VideoIcon className="size-5" />
-            </button>
-            <Window>
-              <ChannelHeader />
-              <MessageList />
-              <MessageInput focus />
-            </Window>
-          </div>
-          <Thread />
-        </Channel>
-      </Chat>
+    <div className="chat-page bg-base-200 text-base-content p-2 sm:p-4 lg:p-6">
+      <div className="h-full max-w-7xl mx-auto">
+        <Chat client={chatClient}>
+          <Channel channel={channel}>
+            <div className="w-full h-full relative">
+              <button
+                onClick={handleVideoCall}
+                className="btn btn-primary btn-circle absolute top-4 right-4 z-10"
+                title="Start video call"
+              >
+                <VideoIcon className="size-5" />
+              </button>
+              <Window>
+                <ChannelHeader />
+                <MessageList />
+                <MessageInput focus />
+              </Window>
+            </div>
+            <Thread />
+          </Channel>
+        </Chat>
+      </div>
     </div>
   );
 };

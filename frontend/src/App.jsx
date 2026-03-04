@@ -150,7 +150,20 @@ const App = () => {
             )
           }
         />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/profile"
+          element={
+            isAuthenticated && isOnboarded ? (
+              <Layout>
+                <ProfilePage />
+              </Layout>
+            ) : (
+              <Navigate
+                to={!isAuthenticated ? "/loginpage" : "/onboardingpage"}
+              />
+            )
+          }
+        />
       </Routes>
 
       <Toaster />

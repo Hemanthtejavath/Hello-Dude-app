@@ -203,3 +203,70 @@ export async function onbording(req, res) {
     });
   }
 }
+
+export async function updateProfile(req, res) {
+  try {
+    const userId = req.user._id;
+    const allowedFields = [
+      "name",
+      "bio",
+      "nativeLanguage",
+      "learningLanguage",
+      "location",
+      "profilePic",
+    ];
+
+    const updates = {};
+    for (const field of allowedFields) {
+      if (Object.prototype.hasOwnProperty.call(req.body, field)) {
+        const value = req.body[field];
+        updates[field] = typeof value === "string" ? value.trim() : value;
+      }
+    }
+
+    if (Object.keys(updates).length === 0) {
+      return res.status(400).json({
+        message: "No valid profile fields provided",
+      });
+    }
+
+    if (Object.prototype.hasOwnProperty.call(updates, "name") && !updates.name) {
+      return res.status(400).json({
+        message: "Name is required",
+      });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: updates },
+      { new: true, runValidators: true },
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    try {
+      await upsertStreamUser({
+        id: updatedUser._id.toString(),
+        name: updatedUser.name,
+        image: updatedUser.profilePic || "",
+      });
+    } catch (streamError) {
+      console.log("stream error", streamError);
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error in updateProfile controller:", error);
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}

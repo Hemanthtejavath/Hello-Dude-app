@@ -5,11 +5,28 @@ export async function getRecomendedUsers(req, res) {
   try {
     const currentUserId = req.user._id;
     const currentUser = req.user;
+    const search = (req.query.search || "").trim();
+    const escapedSearch = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const searchRegex = escapedSearch ? new RegExp(escapedSearch, "i") : null;
+
+    const searchFilter = searchRegex
+      ? {
+          $or: [
+            { name: searchRegex },
+            { bio: searchRegex },
+            { location: searchRegex },
+            { nativeLanguage: searchRegex },
+            { learningLanguage: searchRegex },
+          ],
+        }
+      : {};
+
     // get current user with friends
     const recommendedUsers = await User.find({
       $and: [
         { _id: { $ne: currentUserId } }, // exclude current user
         { _id: { $nin: currentUser.friends } }, //exclude current user's friends
+        searchFilter,
         // { isOnboarding: true },
       ],
     });

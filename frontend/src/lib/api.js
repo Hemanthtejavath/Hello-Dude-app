@@ -1,4 +1,3 @@
-import { AwardIcon } from "lucide-react";
 import { axiosInstance } from "./axios.js";
 
 export const signup = async (signupData) => {
@@ -26,13 +25,20 @@ export const completeOnboarding = async (userData) => {
   return response.data;
 };
 
+export const updateProfile = async (userData) => {
+  const response = await axiosInstance.patch("/auth/profile", userData);
+  return response.data;
+};
+
 export async function getUserFriends() {
   const response = await axiosInstance.get("/users/friends");
   return response.data;
 }
 
-export async function getRecommendedUser() {
-  const response = await axiosInstance.get("/users");
+export async function getRecommendedUser(search = "") {
+  const response = await axiosInstance.get("/users", {
+    params: { search },
+  });
   return response.data;
 }
 

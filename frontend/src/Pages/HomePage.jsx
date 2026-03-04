@@ -7,6 +7,7 @@ import {
   UsersIcon,
   UserPlusIcon,
   CheckCircleIcon,
+  SearchIcon,
 } from "lucide-react";
 import {
   getRecommendedUser,
@@ -24,6 +25,7 @@ const HomePage = () => {
   const queryClient = useQueryClient();
   const [outgoingRequestIds, setOutgoingRequest] = useState(new Set());
   const [pendingUserId, setPendingUserId] = useState(null);
+  const [suggestionSearch, setSuggestionSearch] = useState("");
 
   const { data: friends = [], isLoading: loadingFriends } = useQuery({
     queryKey: ["friends"],
@@ -31,8 +33,8 @@ const HomePage = () => {
   });
 
   const { data: recommendedUsers = [], isLoading: loadingUser } = useQuery({
-    queryKey: ["Users"],
-    queryFn: getRecommendedUser,
+    queryKey: ["Users", suggestionSearch],
+    queryFn: () => getRecommendedUser(suggestionSearch),
   });
 
   const { data: outgoingFriendReqsData } = useQuery({
@@ -92,6 +94,18 @@ const HomePage = () => {
               around you. Send friend requests and grow your circle.
             </p>
           </div>
+
+          <label className="input input-bordered flex items-center gap-2 max-w-md mb-6">
+            <SearchIcon className="size-4 opacity-70" />
+            <input
+              type="text"
+              className="grow"
+              placeholder="Search suggestions by name, location, or language"
+              value={suggestionSearch}
+              onChange={(e) => setSuggestionSearch(e.target.value)}
+            />
+          </label>
+
           {loadingUser ? (
             <div className="felx justify-center py-12">
               <span className="loading loading-spinner loading-lg" />
@@ -99,10 +113,14 @@ const HomePage = () => {
           ) : recommendedUsers.length === 0 ? (
             <div className="card bg-base-200 p-6 text-center">
               <h3 className="font-semibold text-lg mb-2">
-                No recommendations available
+                {suggestionSearch
+                  ? "No users matched your search"
+                  : "No recommendations available"}
               </h3>
               <p className="text-base-content opacity-70">
-                Check back later for new language partners!
+                {suggestionSearch
+                  ? "Try another search term."
+                  : "Check back later for new language partners!"}
               </p>
             </div>
           ) : (

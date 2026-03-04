@@ -2,52 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Stream Chat (stream-chat-react)
-   Requirement:
-   - ChatPage background should follow DaisyUI theme
-   - Chat "body" (actual chat UI surfaces) should stay white */
+/* Stream Chat theme alignment with DaisyUI tokens */
+.chat-page {
+  /* 5rem = navbar height (h-20) */
+  height: calc(100dvh - 5rem);
+  min-height: calc(100svh - 5rem);
+  overflow: hidden;
+}
 
 .chat-page .str-chat__channel {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* This is the area behind the chat container */
-  background-color: hsl(var(--b2));
+  background-color: hsl(var(--b2) / 1);
   color: hsl(var(--bc));
   height: 100%;
 }
 
 .chat-page .str-chat {
-  /* Let the outer area reflect the theme */
-  background-color: hsl(var(--b2));
+  background-color: hsl(var(--b2) / 1);
   color: hsl(var(--bc));
+  height: 100%;
+  min-height: 0;
+  --str-chat__text-color: hsl(var(--bc));
+  --str-chat__message-color: hsl(var(--bc));
+  --str-chat__message-bubble-color: hsl(var(--bc));
+  --str-chat__message-bubble-background-color: hsl(var(--b2) / 1);
+  --str-chat__message-list-background-color: hsl(var(--b1) / 1);
+  --str-chat__message-input-color: hsl(var(--bc));
+  --str-chat__message-input-background-color: hsl(var(--b1) / 1);
+  --str-chat__message-textarea-color: hsl(var(--bc));
+  --str-chat__message-textarea-background-color: hsl(var(--b1) / 1);
+  --str-chat__own-message-bubble-color: hsl(var(--pc));
+  --str-chat__own-message-bubble-background-color: hsl(var(--p) / 1);
 }
 
 .str-chat__container {
   max-width: 1200px;
   width: 100%;
-  height: 95% !important;
+  height: 100% !important;
   margin: 0 auto !important;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   overflow: hidden;
 }
 
 .chat-page .str-chat__container {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: hsl(var(--b1) / 1);
+  color: hsl(var(--bc));
+  border: 1px solid hsl(var(--b3) / 1);
 }
 
 .chat-page .str-chat__list {
-  background-color: #ffffff;
-  color: #000000;
-  padding: 12px;
+  background-color: hsl(var(--b1) / 1);
+  color: hsl(var(--bc));
+  padding: 16px;
+  overscroll-behavior: contain;
 }
 
 .chat-page .str-chat__channel-header {
-  background-color: #ffffff;
-  color: #000000;
-  border-bottom: 1px solid #e5e7eb;
+  background-color: hsl(var(--b1) / 1);
+  color: hsl(var(--bc));
+  border-bottom: 1px solid hsl(var(--b3) / 1);
+  padding: 12px 16px;
 }
 
 .str-chat__list-notifications {
@@ -55,22 +72,97 @@
 }
 
 .chat-page .str-chat__message-input {
-  background-color: #ffffff;
-  color: #000000;
-  border-top: 1px solid #e5e7eb;
+  background-color: hsl(var(--b1) / 1);
+  color: hsl(var(--bc));
+  border-top: 1px solid hsl(var(--b3) / 1);
+  padding: 10px 12px;
 }
 
 .chat-page .str-chat__thread {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: hsl(var(--b1) / 1);
+  color: hsl(var(--bc));
+  border-left: 1px solid hsl(var(--b3) / 1);
 }
 
-/* Stream default input uses its own surface colors; keep it readable on all themes. */
 .chat-page .str-chat__message-input textarea {
-  color: #000000;
-  caret-color: #000000;
+  color: hsl(var(--bc));
+  caret-color: hsl(var(--bc));
+  background-color: transparent;
 }
 
 .chat-page .str-chat__message-input textarea::placeholder {
-  color: rgba(0, 0, 0, 0.55);
+  color: hsl(var(--bc) / 0.6);
+}
+
+.chat-page .str-chat__date-separator-date,
+.chat-page .str-chat__message-simple-name,
+.chat-page .str-chat__message-simple-status,
+.chat-page .str-chat__message-text-inner,
+.chat-page .str-chat__message-attachment-card,
+.chat-page .str-chat__channel-header-title,
+.chat-page .str-chat__channel-header-info {
+  color: hsl(var(--bc));
+}
+
+.chat-page .str-chat__message-simple__actions__action--reactions {
+  background-color: hsl(var(--b2) / 1);
+  border: 1px solid hsl(var(--b3) / 1);
+}
+
+.chat-page .str-chat__message-simple__text-inner {
+  border-radius: 12px;
+}
+
+.chat-page .str-chat__message-simple--me .str-chat__message-simple__text-inner {
+  background-color: hsl(var(--p) / 1) !important;
+  color: hsl(var(--pc)) !important;
+}
+
+.chat-page .str-chat__message-simple:not(.str-chat__message-simple--me)
+  .str-chat__message-simple__text-inner {
+  background-color: hsl(var(--b2) / 1) !important;
+  color: hsl(var(--bc)) !important;
+}
+
+.chat-page .str-chat a {
+  color: hsl(var(--p)) !important;
+}
+
+.chat-page .str-chat__message-simple--me .str-chat__message-simple__text-inner,
+.chat-page .str-chat__message-simple--me .str-chat__message-simple__text-inner * {
+  color: hsl(var(--pc)) !important;
+}
+
+.chat-page .str-chat__message-simple:not(.str-chat__message-simple--me)
+  .str-chat__message-simple__text-inner,
+.chat-page .str-chat__message-simple:not(.str-chat__message-simple--me)
+  .str-chat__message-simple__text-inner * {
+  color: hsl(var(--bc)) !important;
+}
+
+/* Cover alternate Stream message class names too */
+.chat-page .str-chat__message--me .str-chat__message-text-inner {
+  background-color: hsl(var(--p) / 1) !important;
+  color: hsl(var(--pc)) !important;
+}
+
+.chat-page .str-chat__message--me .str-chat__message-text-inner * {
+  color: hsl(var(--pc)) !important;
+}
+
+.chat-page .str-chat__message-text-inner {
+  background-color: hsl(var(--b2) / 1);
+  color: hsl(var(--bc));
+}
+
+/* Hard fallback: any "me" message variant gets guaranteed contrast */
+.chat-page [class*="--me"] .str-chat__message-text-inner,
+.chat-page [class*="--me"] .str-chat__message-simple__text-inner {
+  background-color: hsl(var(--p) / 1) !important;
+  color: hsl(var(--pc)) !important;
+}
+
+.chat-page [class*="--me"] .str-chat__message-text-inner *,
+.chat-page [class*="--me"] .str-chat__message-simple__text-inner * {
+  color: hsl(var(--pc)) !important;
 }
