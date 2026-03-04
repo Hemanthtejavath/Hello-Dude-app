@@ -11,7 +11,6 @@ const Signup = () => {
   });
 
   const [accepted, setAccepted] = useState(false);
-  const { theme } = userThemeStore();
   const { isPending, error, signupMutation } = userSignup();
 
   const handleSubmit = (e) => {

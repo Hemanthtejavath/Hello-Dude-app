@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const BASE_URL =
-  import.meta.env.MODE === "production" ? "https://localhost.5001/api" : "/api"; // Base URL for API requests
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api";
 
 // Create an instance of axios with default configuration
 export const axiosInstance = axios.create({

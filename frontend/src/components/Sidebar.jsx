@@ -12,7 +12,7 @@ const Sidebar = () => {
       <div className="flex items-center justify-center h-20 border-b border-base-300  lg:flex">
         <Link to="/" className="flex items-center gap-3">
           <div>
-            <img src="/public/app-logo.png" className="w-20" alt="nav-logo" />
+            <img src="/app-logo.png" className="w-20" alt="nav-logo" />
           </div>
           <img src="/app-name-logo.png" alt="name-logo" className="w-20" />
         </Link>
@@ -69,3 +69,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+

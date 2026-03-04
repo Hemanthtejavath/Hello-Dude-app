@@ -1,4 +1,5 @@
 import { StrictMode } from "react";
+
 //react router imports
 import { createRoot } from "react-dom/client";
 //react router imports

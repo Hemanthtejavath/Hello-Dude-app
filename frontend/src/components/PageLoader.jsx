@@ -17,7 +17,7 @@ const PageLoader = () => {
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-xl">
             <span className="text-white text-xl font-extrabold">
-              <img src="/public/app-logo.png" className="w-50" alt="applogo" />
+              <img src="/app-logo.png" className="w-50" alt="applogo" />
             </span>
           </div>
         </div>
@@ -32,3 +32,4 @@ const PageLoader = () => {
 };
 
 export default PageLoader;
+
