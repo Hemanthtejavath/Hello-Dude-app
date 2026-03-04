@@ -3,6 +3,14 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { upsertStreamUser } from "../lib/stream.js";
 
+const isProduction = process.env.NODE_ENV === "production";
+const authCookieOptions = {
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+  httpOnly: true,
+  sameSite: isProduction ? "none" : "lax",
+  secure: isProduction,
+};
+
 // sign up logic code
 export async function signup(req, res) {
   const { email, password, name } = req.body;
@@ -63,12 +71,7 @@ export async function signup(req, res) {
       },
     );
 
-    res.cookie("jwt", token, {
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      httpOnly: true,
-      sameSite: "strict",
-      secure: process.env.NODE_ENV === "production",
-    });
+    res.cookie("jwt", token, authCookieOptions);
 
     return res.status(201).json({
       success: true,
@@ -111,12 +114,7 @@ export async function login(req, res) {
       expiresIn: "7d",
     });
 
-    res.cookie("jwt", token, {
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      httpOnly: true,
-      sameSite: "strict",
-      secure: process.env.NODE_ENV === "production",
-    });
+    res.cookie("jwt", token, authCookieOptions);
 
     return res.status(200).json({
       success: true,
@@ -137,7 +135,7 @@ export async function login(req, res) {
 }
 //logout logic code
 export async function logout(req, res) {
-  res.clearCookie("jwt");
+  res.clearCookie("jwt", authCookieOptions);
   res.status(200).json({ success: true, message: "Logout Successfully" });
 }
 
