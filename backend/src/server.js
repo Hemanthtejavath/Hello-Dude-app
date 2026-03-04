@@ -9,14 +9,15 @@ import chatRoutes from "./routes/chat.route.js";
 import cors from "cors";
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5001;
 const __dirname = path.resolve();
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 
 app.use(express.json()); // middlw where for json formate data from the user
 app.use(cookieparser()); // cookie parser nothing but , when user onbording the page before it it verigy with  bearer toke( cookie)
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend URL
+    origin: CLIENT_URL, // frontend URL
     credentials: true, // allow cookies to be sent in cross-origin requests
   }),
 );
