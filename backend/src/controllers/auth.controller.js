@@ -11,6 +11,12 @@ const authCookieOptions = {
   secure: isProduction,
 };
 
+const clearAuthCookieOptions = {
+  httpOnly: true,
+  sameSite: isProduction ? "none" : "lax",
+  secure: isProduction,
+};
+
 // sign up logic code
 export async function signup(req, res) {
   const { email, password, name } = req.body;
@@ -135,7 +141,7 @@ export async function login(req, res) {
 }
 //logout logic code
 export async function logout(req, res) {
-  res.clearCookie("jwt", authCookieOptions);
+  res.clearCookie("jwt", clearAuthCookieOptions);
   res.status(200).json({ success: true, message: "Logout Successfully" });
 }
 
